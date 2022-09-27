@@ -13,16 +13,12 @@
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/LoginFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.lostcats.SecondFragment"
+        android:id="@+id/LoginFragment"
+        android:name="com.example.lostcats.LoginFragment"
         android:label="@string/login_fragment_label"
         tools:layout="@layout/fragment_login">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>
