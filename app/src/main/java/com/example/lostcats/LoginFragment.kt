@@ -36,6 +36,10 @@ class LoginFragment : Fragment() {
         binding.buttonRegister.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        binding.buttonContinue.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     override fun onDestroyView() {
