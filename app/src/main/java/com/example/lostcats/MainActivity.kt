@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
+            // TODO: Figure out how to make a OptionsMenu item open a fragment
             R.id.action_login -> {
                 findNavController(R.id.action_ListFragment_to_LoginFragment)
                 true

@@ -1,10 +1,9 @@
 package com.example.lostcats
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.lostcats.databinding.FragmentListBinding
 import com.google.android.material.snackbar.Snackbar
@@ -31,7 +30,7 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.floatingPlusButton.setOnClickListener {
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Redirect to add a cat fragment", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
 
