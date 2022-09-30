@@ -3,6 +3,8 @@ package com.example.lostcats
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.text.DateFormat
+import java.util.*
 
 class CatsViewModel : ViewModel() {
     //private var _cats = mutableListOf<Cat>()
@@ -61,4 +63,7 @@ class CatsViewModel : ViewModel() {
         mutableLiveData.value = _cats
     }
 
+    fun humanDate(date: Long): String {
+        return DateFormat.getDateInstance().format(date * 1000L)
+    }
 }

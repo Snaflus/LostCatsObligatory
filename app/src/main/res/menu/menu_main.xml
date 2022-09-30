@@ -4,7 +4,12 @@
     tools:context="com.example.lostcats.MainActivity">
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="99"
         android:title="@string/action_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_login"
+        android:orderInCategory="100"
+        android:title="@string/login"
         app:showAsAction="never" />
 </menu>

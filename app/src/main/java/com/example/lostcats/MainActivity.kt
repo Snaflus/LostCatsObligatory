@@ -41,6 +41,10 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
+            R.id.action_login -> {
+                findNavController(R.id.action_ListFragment_to_LoginFragment)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
