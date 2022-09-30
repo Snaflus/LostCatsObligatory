@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Lost Cats</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
     <string name="list_fragment_label">Lost Cats List</string>
     <string name="login_fragment_label">Login</string>
     <string name="continue_no_login">Continue without logging in</string>
@@ -9,7 +8,4 @@
     <string name="register">Register</string>
     <string name="hint_password">Password</string>
     <string name="hint_username">Username</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
