@@ -3,24 +3,26 @@ package com.example.lostcats.models
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.lostcats.repository.LostCatsRepository
 import java.text.DateFormat
 import java.util.*
 
 class CatsViewModel : ViewModel() {
-    //private var _cats = mutableListOf<Cat>()
-    private var mutableLiveData: MutableLiveData<List<Cat>> = MutableLiveData()
+    private val repository = LostCatsRepository()
+    val catsLiveData: LiveData<List<Cat>> = repository.catsLiveData
+    val errorMessageLiveData: LiveData<String> = repository.errorMessageLiveData
+    val updateMessageLiveData: LiveData<String> = repository.errorMessageLiveData
 
-    //for debugging without REST API service
-    private val _cats = mutableListOf<Cat>(
-        Cat(1, "Döner", "Blød", "Køge", 1000, "Alan", System.currentTimeMillis()/1000, ""),
-        Cat(2, "Egon", "Hård", "Roskilde", 2000, "Bob", System.currentTimeMillis()/1000, ""),
-        Cat(3, "Fiat", "Som pigtråd", "Århus", 5000, "Chris", System.currentTimeMillis()/1000, "")
-    )
+    init {
+        reload()
+    }
+    
+    fun reload(){
+        repository.getPosts()
+    }
 
-    val cats: LiveData<List<Cat>> = mutableLiveData
-
-    operator fun get(userId: String, place: String, sort_by: String): MutableList<Cat> {
-        var data = _cats
+    operator fun get(userId: String, place: String, sort_by: String): List<Cat> {
+        var data = catsLiveData as MutableList<Cat> //convert to mutablelist for filtering
 
         // TODO: isNotBlank may need to be changed to isNullOrBlank
 
@@ -40,6 +42,14 @@ class CatsViewModel : ViewModel() {
                 "reward" -> data.sortBy { it.reward }
                 "userId" -> data.sortBy { it.userId }
                 "date" -> data.sortBy { it.date }
+
+                "idDesc" -> data.sortByDescending { it.id }
+                "nameDesc" -> data.sortByDescending { it.name }
+                "placeDesc" -> data.sortByDescending { it.place }
+                "rewardDsc" -> data.sortByDescending { it.reward }
+                "userIdDesc" -> data.sortByDescending { it.userId }
+                "dateDesc" -> data.sortByDescending { it.date }
+
                 else -> {
                     println("invalid sort_by")
                 }
@@ -48,19 +58,17 @@ class CatsViewModel : ViewModel() {
         return data
     }
 
+    operator fun get(id: Int): Cat? {
+        return catsLiveData.value?.get(id)
+    }
+
     fun add(data: Cat) {
         data.id = 0 //ensures id is not null, API assigns it anyway
-        _cats.add(data)
-        mutableLiveData.value = _cats
+        repository.add(data)
     }
 
-    operator fun get(position: Int): Cat {
-        return _cats[position]
-    }
-
-    fun delete(data: Cat) {
-        _cats.add(data)
-        mutableLiveData.value = _cats
+    fun delete(id: Int) {
+        repository.delete(id)
     }
 
     fun humanDate(date: Long): String {
