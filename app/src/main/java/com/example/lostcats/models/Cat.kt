@@ -1,4 +1,4 @@
-package com.example.lostcats
+package com.example.lostcats.models
 
 data class Cat (
     var id: Int,

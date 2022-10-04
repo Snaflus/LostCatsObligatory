@@ -1,4 +1,4 @@
-package com.example.lostcats
+package com.example.lostcats.models
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
