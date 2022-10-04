@@ -24,7 +24,7 @@ class CatsViewModel : ViewModel() {
     operator fun get(userId: String, place: String, sort_by: String): List<Cat> {
         var data = catsLiveData as MutableList<Cat> //convert to mutablelist for filtering
 
-        // TODO: isNotBlank may need to be changed to isNullOrBlank
+        // TODO: isNotBlank may need to be changed to !isNullOrBlank
 
         if (userId.isNotBlank()) {
             data = data.filter { it.userId == userId } as MutableList<Cat>
@@ -63,7 +63,6 @@ class CatsViewModel : ViewModel() {
     }
 
     fun add(data: Cat) {
-        data.id = 0 //ensures id is not null, API assigns it anyway
         repository.add(data)
     }
 
