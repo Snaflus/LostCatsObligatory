@@ -45,7 +45,7 @@ class ListFragment : Fragment() {
             binding.recyclerView.visibility = if (cats == null) View.GONE else View.VISIBLE
             if (cats != null) {
                 val adapter = CatsAdapter(cats) { position ->  }
-                
+                //TODO ISSUE WITH RECYCLER?
 
                 binding.recyclerView.adapter = adapter
             }
