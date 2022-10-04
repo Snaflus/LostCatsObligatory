@@ -16,7 +16,7 @@ class CatsViewModel : ViewModel() {
     init {
         reload()
     }
-    
+
     fun reload(){
         repository.getPosts()
     }
@@ -46,7 +46,7 @@ class CatsViewModel : ViewModel() {
                 "idDesc" -> data.sortByDescending { it.id }
                 "nameDesc" -> data.sortByDescending { it.name }
                 "placeDesc" -> data.sortByDescending { it.place }
-                "rewardDsc" -> data.sortByDescending { it.reward }
+                "rewardDesc" -> data.sortByDescending { it.reward }
                 "userIdDesc" -> data.sortByDescending { it.userId }
                 "dateDesc" -> data.sortByDescending { it.date }
 
