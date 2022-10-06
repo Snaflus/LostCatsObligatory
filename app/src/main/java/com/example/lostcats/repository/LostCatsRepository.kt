@@ -23,7 +23,7 @@ class LostCatsRepository {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         lostCatsService = build.create(LostCatsService::class.java)
-        getPosts()
+        //getPosts() //potentially redundant, is called in CatsViewModel init
     }
 
     fun getPosts() {

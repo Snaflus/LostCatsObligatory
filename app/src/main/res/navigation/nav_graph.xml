@@ -20,5 +20,8 @@
         android:name="com.example.lostcats.LoginFragment"
         android:label="@string/login_fragment_label"
         tools:layout="@layout/fragment_login">
+        <argument
+            android:name="position"
+            app:argType="integer"/>
     </fragment>
 </navigation>

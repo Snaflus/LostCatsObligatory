@@ -44,8 +44,19 @@ class ListFragment : Fragment() {
             //binding.progressbar.visibility = View.GONE
             binding.recyclerView.visibility = if (cats == null) View.GONE else View.VISIBLE
             if (cats != null) {
-                val adapter = CatsAdapter(cats) { position ->  }
-                //TODO ISSUE WITH RECYCLER?
+                val adapter = CatsAdapter(cats) { position ->
+                    val action =
+                        ListFragmentDirections.actionListFragmentToLoginFragment(position)
+                    findNavController().navigate((action))
+                }
+                var columns = 2
+                val currentOrientation = this.resources.configuration.orientation
+                if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    columns = 4
+                } else if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
+                    columns = 2
+                }
+                binding.recyclerView.layoutManager = GridLayoutManager(this.context, columns)
 
                 binding.recyclerView.adapter = adapter
             }
@@ -56,6 +67,11 @@ class ListFragment : Fragment() {
         }
 
         viewModel.reload()
+
+//        binding.swiperefresh.setOnClickListener {
+//            viewModel.reload()
+//            binding.swiperefresh.IsRefreshing = false
+//        }
 
         binding.floatingPlusButton.setOnClickListener {
             Snackbar.make(view, "Redirect to add a cat fragment", Snackbar.LENGTH_LONG)

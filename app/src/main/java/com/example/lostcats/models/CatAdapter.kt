@@ -9,8 +9,7 @@ import com.example.lostcats.R
 
 class CatsAdapter(
     private val items: List<Cat>,
-    private val onItemClicked: (position: Int) -> Unit
-) :
+    private val onItemClicked: (position: Int) -> Unit) :
     RecyclerView.Adapter<CatsAdapter.MyViewHolder>() {
 
     override fun getItemCount(): Int {
