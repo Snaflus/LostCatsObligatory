@@ -15,6 +15,8 @@ import com.example.lostcats.models.Cat
 import com.example.lostcats.models.CatsAdapter
 import com.example.lostcats.models.CatsViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class ListFragment : Fragment() {
 
@@ -72,6 +74,8 @@ class ListFragment : Fragment() {
 //            viewModel.reload()
 //            binding.swiperefresh.IsRefreshing = false
 //        }
+
+        binding.testMessage.text = "Welcome" + Firebase.auth.currentUser?.email
 
         binding.floatingPlusButton.setOnClickListener {
             Snackbar.make(view, "Redirect to add a cat fragment", Snackbar.LENGTH_LONG)

@@ -10,7 +10,6 @@
         android:name="com.example.lostcats.ListFragment"
         android:label="@string/list_fragment_label"
         tools:layout="@layout/fragment_list">
-
         <action
             android:id="@+id/action_ListFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />
@@ -20,6 +19,9 @@
         android:name="com.example.lostcats.LoginFragment"
         android:label="@string/login_fragment_label"
         tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_LoginFragment_to_ListFragment"
+            app:destination="@+id/ListFragment" />
         <argument
             android:name="position"
             app:argType="integer"/>

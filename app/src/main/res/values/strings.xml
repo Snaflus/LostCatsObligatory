@@ -5,7 +5,8 @@
     <string name="login_fragment_label">Login</string>
     <string name="continue_no_login">Continue without logging in</string>
     <string name="login">Login</string>
+    <string name="signout">Sign out</string>
     <string name="register">Register</string>
     <string name="hint_password">Password</string>
-    <string name="hint_username">Username</string>
+    <string name="hint_email_login">Email</string>
 </resources>

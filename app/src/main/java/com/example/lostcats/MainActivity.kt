@@ -10,6 +10,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.example.lostcats.databinding.ActivityMainBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,6 +34,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
+//        (FirebaseAuth.getInstance().currentUser == null) {
+//            // TODO does not update after login: need observable property (ViewModel)
+//            val menuItem = menu.findItem(R.id.action_signout)
+//            menuItem.isVisible = false
+//        }
         return true
     }
 
@@ -43,7 +50,19 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             // TODO: Figure out how to make a OptionsMenu item open a fragment
             R.id.action_login -> {
-                findNavController(R.id.action_ListFragment_to_LoginFragment)
+                findNavController(R.id.nav_host_fragment_content_main).popBackStack(R.id.LoginFragment, false)
+                //findNavController(R.id.action_ListFragment_to_LoginFragment)
+                true
+            }
+            R.id.action_signout -> {
+                if (Firebase.auth.currentUser != null) {
+                    Firebase.auth.signOut()
+                    val navController = findNavController(R.id.nav_host_fragment_content_main)
+                    navController.popBackStack(R.id.LoginFragment, false)
+                    // https://developer.android.com/codelabs/android-navigation#6
+                } else {
+                    Snackbar.make(binding.root, "Cannot sign out", Snackbar.LENGTH_LONG).show()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
