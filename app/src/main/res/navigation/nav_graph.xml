@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_ListFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />
+        <action
+            android:id="@+id/action_ListFragment_to_AddCatFragment"
+            app:destination="@+id/AddCatFragment" />
     </fragment>
     <fragment
         android:id="@+id/LoginFragment"
@@ -22,8 +25,11 @@
         <action
             android:id="@+id/action_LoginFragment_to_ListFragment"
             app:destination="@+id/ListFragment" />
-        <argument
-            android:name="position"
-            app:argType="integer"/>
+    </fragment>
+    <fragment
+        android:id="@+id/AddCatFragment"
+        android:name="com.example.lostcats.AddCatFragment"
+        android:label="@string/add_cat_fragment_label"
+        tools:layout="@layout/fragment_add_cat">
     </fragment>
 </navigation>

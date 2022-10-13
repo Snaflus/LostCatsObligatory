@@ -9,6 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.lostcats.databinding.ActivityMainBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) //Force light/day mode
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
@@ -34,11 +36,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
-//        (FirebaseAuth.getInstance().currentUser == null) {
-//            // TODO does not update after login: need observable property (ViewModel)
-//            val menuItem = menu.findItem(R.id.action_signout)
-//            menuItem.isVisible = false
-//        }
+        if (Firebase.auth.currentUser == null) {
+            // TODO does not update after login: need observable property (ViewModel)
+            menu.findItem(R.id.action_signout).isVisible = false
+            menu.findItem(R.id.action_login).isVisible = true
+        } else {
+            menu.findItem(R.id.action_signout).isVisible = true
+            menu.findItem(R.id.action_login).isVisible = false
+        }
         return true
     }
 
@@ -46,11 +51,15 @@ class MainActivity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         return when (item.itemId) {
             R.id.action_settings -> true
             // TODO: Figure out how to make a OptionsMenu item open a fragment
             R.id.action_login -> {
-                findNavController(R.id.nav_host_fragment_content_main).popBackStack(R.id.LoginFragment, false)
+                findNavController(R.id.nav_host_fragment_content_main).popBackStack(
+                    R.id.LoginFragment,
+                    false
+                )
                 //findNavController(R.id.action_ListFragment_to_LoginFragment)
                 true
             }

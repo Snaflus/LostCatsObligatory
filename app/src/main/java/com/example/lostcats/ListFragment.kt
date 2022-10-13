@@ -46,10 +46,10 @@ class ListFragment : Fragment() {
             //binding.progressbar.visibility = View.GONE
             binding.recyclerView.visibility = if (cats == null) View.GONE else View.VISIBLE
             if (cats != null) {
-                val adapter = CatsAdapter(cats) { position ->
-                    val action =
-                        ListFragmentDirections.actionListFragmentToLoginFragment(position)
-                    findNavController().navigate((action))
+                val adapter = CatsAdapter(cats) { //position ->
+                    //val action =
+                    //ListFragmentDirections.actionListFragmentToLoginFragment(position)
+                    //findNavController().navigate((action))
                 }
                 var columns = 2
                 val currentOrientation = this.resources.configuration.orientation
@@ -65,7 +65,7 @@ class ListFragment : Fragment() {
         }
 
         viewModel.errorMessageLiveData.observe(viewLifecycleOwner) { errorMessage ->
-            Log.d("KIWI",errorMessage)
+            Log.d("KIWI", errorMessage)
         }
 
         viewModel.reload()
@@ -75,11 +75,10 @@ class ListFragment : Fragment() {
 //            binding.swiperefresh.IsRefreshing = false
 //        }
 
-        binding.testMessage.text = "Welcome" + Firebase.auth.currentUser?.email
-
         binding.floatingPlusButton.setOnClickListener {
-            Snackbar.make(view, "Redirect to add a cat fragment", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            findNavController().navigate(R.id.action_ListFragment_to_AddCatFragment)
+            //Snackbar.make(view, "Redirect to add a cat fragment", Snackbar.LENGTH_LONG)
+            //    .setAction("Action", null).show()
         }
 
         binding.buttonFirst.setOnClickListener {
