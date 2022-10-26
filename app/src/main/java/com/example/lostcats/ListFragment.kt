@@ -81,9 +81,6 @@ class ListFragment : Fragment() {
             //    .setAction("Action", null).show()
         }
 
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_ListFragment_to_LoginFragment)
-        }
     }
 
     override fun onDestroyView() {

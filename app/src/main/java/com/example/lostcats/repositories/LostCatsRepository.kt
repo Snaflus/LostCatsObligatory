@@ -1,4 +1,4 @@
-package com.example.lostcats.repository
+package com.example.lostcats.repositories
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

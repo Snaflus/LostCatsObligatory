@@ -9,8 +9,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.activity.viewModels
 import com.example.lostcats.databinding.ActivityMainBinding
+import com.example.lostcats.models.UsersViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -18,6 +19,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    private val usersViewModel: UsersViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,16 +36,19 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
-        if (Firebase.auth.currentUser == null) {
-            // TODO does not update after login: need observable property (ViewModel)
-            menu.findItem(R.id.action_signout).isVisible = false
-            menu.findItem(R.id.action_login).isVisible = true
-        } else {
-            menu.findItem(R.id.action_signout).isVisible = true
-            menu.findItem(R.id.action_login).isVisible = false
+
+        usersViewModel.userLiveData.observe(this) {
+            if (it == null) {
+                menu.findItem(R.id.action_signout).isVisible = false
+                menu.findItem(R.id.action_login).isVisible = true
+            } else {
+                menu.findItem(R.id.action_signout).isVisible = true
+                menu.findItem(R.id.action_login).isVisible = false
+            }
         }
         return true
     }
@@ -53,25 +59,21 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
 
         return when (item.itemId) {
-            R.id.action_settings -> true
-            // TODO: Figure out how to make a OptionsMenu item open a fragment
+            R.id.action_settings -> {
+                val navController = findNavController(R.id.nav_host_fragment_content_main)
+                navController.navigate(R.id.SettingsFragment)
+                true
+            }
             R.id.action_login -> {
-                findNavController(R.id.nav_host_fragment_content_main).popBackStack(
-                    R.id.LoginFragment,
-                    false
-                )
-                //findNavController(R.id.action_ListFragment_to_LoginFragment)
+                val navController = findNavController(R.id.nav_host_fragment_content_main)
+                navController.navigate(R.id.LoginFragment)
                 true
             }
             R.id.action_signout -> {
-                if (Firebase.auth.currentUser != null) {
-                    Firebase.auth.signOut()
-                    val navController = findNavController(R.id.nav_host_fragment_content_main)
-                    navController.popBackStack(R.id.LoginFragment, false)
-                    // https://developer.android.com/codelabs/android-navigation#6
-                } else {
-                    Snackbar.make(binding.root, "Cannot sign out", Snackbar.LENGTH_LONG).show()
-                }
+                usersViewModel.signOut()
+                //val navController = findNavController(R.id.nav_host_fragment_content_main)
+                //navController.navigate(R.id.LoginFragment)
+                // https://developer.android.com/codelabs/android-navigation#6
                 true
             }
             else -> super.onOptionsItemSelected(item)
