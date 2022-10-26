@@ -1,4 +1,4 @@
-package com.example.lostcats.repository
+package com.example.lostcats.repositories
 
 import com.example.lostcats.models.Cat
 import retrofit2.Call

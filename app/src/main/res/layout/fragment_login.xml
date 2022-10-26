@@ -9,7 +9,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edittext_email_holder"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="192dp"
@@ -25,7 +25,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edittext_password_holder"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/edittext_email_holder"
@@ -44,7 +44,7 @@
         android:layout_width="200dp"
         android:layout_height="48dp"
         android:text="@string/login"
-        app:backgroundTint="@color/light_grey"
+        style="@style/TextButtonStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edittext_password_holder"
@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:text="@string/register"
-        app:backgroundTint="@color/light_grey"
+        style="@style/TextButtonStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_login"
