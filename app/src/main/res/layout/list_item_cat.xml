@@ -10,7 +10,7 @@
     app:cardMaxElevation="10dp"
     android:maxHeight="50dp"
     app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="false">
 
     <LinearLayout
         android:layout_width="match_parent"
