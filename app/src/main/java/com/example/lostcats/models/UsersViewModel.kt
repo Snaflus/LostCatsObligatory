@@ -11,20 +11,17 @@ import kotlinx.coroutines.*
 open class UsersViewModel : ViewModel() {
     private val repository = UsersRepository()
     val userLiveData = repository.userLiveData
+    val errorLiveData = repository.errorLiveData
 
-    fun signInWithEmailAndPassword(email: String, password: String, navController: NavController) : CharSequence {
-        return repository.signInWithEmailAndPassword(email, password, navController)
+    fun signInWithEmailAndPassword(email: String, password: String) {
+        repository.signInWithEmailAndPassword(email, password)
     }
 
-    fun createUserWithEmailAndPassword(email: String, password: String, navController: NavController) : CharSequence {
-        return repository.createUserWithEmailAndPassword(email, password, navController)
+    fun createUserWithEmailAndPassword(email: String, password: String) {
+        repository.createUserWithEmailAndPassword(email, password)
     }
 
     fun signOut() {
         repository.signOut()
-    }
-
-    fun currentUser(): FirebaseUser? {
-        return repository.currentUser()
     }
 }

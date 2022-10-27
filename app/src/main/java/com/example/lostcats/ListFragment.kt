@@ -4,19 +4,15 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lostcats.databinding.FragmentListBinding
-import com.example.lostcats.models.Cat
 import com.example.lostcats.models.CatsAdapter
 import com.example.lostcats.models.CatsViewModel
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class ListFragment : Fragment() {
 
@@ -42,21 +38,20 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.catsLiveData.observe(viewLifecycleOwner) { cats ->
-            //Log.d("APPLE", "observer $books")
-            //binding.progressbar.visibility = View.GONE
+            binding.progresscircle.visibility = View.GONE
             binding.recyclerView.visibility = if (cats == null) View.GONE else View.VISIBLE
             if (cats != null) {
-                val adapter = CatsAdapter(cats) { //position ->
-                    //val action =
-                    //ListFragmentDirections.actionListFragmentToLoginFragment(position)
-                    //findNavController().navigate((action))
+                val adapter = CatsAdapter(cats) { id ->
+                    val action =
+                        ListFragmentDirections.actionListFragmentToDetailedCatFragment(id)
+                    findNavController().navigate((action))
                 }
-                var columns = 2
+                var columns = 1
                 val currentOrientation = this.resources.configuration.orientation
                 if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    columns = 4
-                } else if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
                     columns = 2
+                } else if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
+                    columns = 1
                 }
                 binding.recyclerView.layoutManager = GridLayoutManager(this.context, columns)
 
@@ -70,15 +65,13 @@ class ListFragment : Fragment() {
 
         viewModel.reload()
 
-//        binding.swiperefresh.setOnClickListener {
-//            viewModel.reload()
-//            binding.swiperefresh.IsRefreshing = false
-//        }
+        binding.swiperefresh.setOnRefreshListener {
+            viewModel.reload()
+            binding.swiperefresh.isRefreshing = false
+        }
 
         binding.floatingPlusButton.setOnClickListener {
             findNavController().navigate(R.id.action_ListFragment_to_AddCatFragment)
-            //Snackbar.make(view, "Redirect to add a cat fragment", Snackbar.LENGTH_LONG)
-            //    .setAction("Action", null).show()
         }
 
     }

@@ -14,8 +14,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.lostcats.databinding.FragmentLoginBinding
 import com.example.lostcats.models.UsersViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlin.math.log
 
 class LoginFragment : Fragment() {
 
@@ -39,9 +39,8 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val currentUser = usersViewModel.currentUser()
-        if (currentUser != null) {
-            //binding.emailInputField.setText(currentUser.email) // half automatic login
+
+        if (usersViewModel.userLiveData.value != null) {
             // current user exists: No need to login again
             findNavController().navigate(R.id.action_LoginFragment_to_ListFragment)
         }
@@ -58,33 +57,10 @@ class LoginFragment : Fragment() {
             }
             // https://firebase.google.com/docs/auth/android/password-auth
 
-            var exceptionString: CharSequence = ""
-            var isSuccessful: Boolean = lifecycleScope.launch(Dispatchers.IO) {
-                exceptionString = usersViewModel.signInWithEmailAndPassword(email, password, findNavController())
-            }.isCompleted
-            if (!isSuccessful) {
-                Snackbar.make(
-                    binding.root,
-                    exceptionString,
-                    Snackbar.LENGTH_LONG
-                ).show()
-                Log.d("KIWI", "Login error")
-            }
-
-//            isSuccessful = usersViewModel.signInWithEmailAndPassword(email, password, findNavController())
-//            if (!isSuccessful) {
-//                Snackbar.make(
-//                    binding.root,
-//                    "Login error",
-//                    Snackbar.LENGTH_LONG
-//                ).show()
-//                Log.d("KIWI", "Login error")
-//            }
+            usersViewModel.signInWithEmailAndPassword(email, password)
         }
 
-
         binding.buttonRegister.setOnClickListener {
-            var isSuccessful = true
             val email = binding.edittextEmail.text.toString().trim()
             val password = binding.edittextPassword.text.toString().trim()
             if (email.isEmpty()) {
@@ -95,18 +71,26 @@ class LoginFragment : Fragment() {
                 binding.edittextPassword.error = "No password"
                 return@setOnClickListener
             }
-
-            usersViewModel.createUserWithEmailAndPassword(email, password, findNavController())
-            if (!isSuccessful) {
-                Snackbar.make(
-                    binding.root,
-                    "User creation error",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                Log.d("KIWI", "User creation error")
-            }
+            usersViewModel.createUserWithEmailAndPassword(email, password)
+            // TODO: make register its own fragment for usability
         }
 
+        usersViewModel.userLiveData.observe(viewLifecycleOwner) {
+            if (usersViewModel.userLiveData.value != null) {
+                val action = LoginFragmentDirections.actionLoginFragmentToListFragment()
+                findNavController().navigate(action)
+            }
+        }
+        usersViewModel.errorLiveData.observe(viewLifecycleOwner) {
+            if (usersViewModel.errorLiveData.value != null) {
+                Snackbar.make(
+                    binding.root,
+                    usersViewModel.errorLiveData.value.toString(),
+                    Snackbar.LENGTH_LONG
+                ).show()
+                Log.d("KIWI", usersViewModel.errorLiveData.value.toString())
+            }
+        }
 
         binding.buttonContinue.setOnClickListener {
             findNavController().popBackStack()
