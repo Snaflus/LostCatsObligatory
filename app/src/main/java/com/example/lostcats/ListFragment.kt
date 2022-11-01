@@ -79,10 +79,6 @@ class ListFragment : Fragment() {
             Log.d("KIWI", errorMessage)
         }
 
-        binding.swiperefresh.setOnRefreshListener {
-            viewModel.reload()
-            binding.swiperefresh.isRefreshing = false
-        }
 
         binding.floatingPlusButton.setOnClickListener {
             findNavController().navigate(R.id.action_ListFragment_to_AddCatFragment)
