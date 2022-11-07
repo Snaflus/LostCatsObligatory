@@ -4,7 +4,9 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -22,6 +24,8 @@ import com.google.firebase.ktx.Firebase
 class DetailedCatFragment : Fragment() {
 
     private var _binding: FragmentDetailedCatBinding? = null
+
+    private val args: DetailedCatFragmentArgs by navArgs()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -41,6 +45,20 @@ class DetailedCatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val cat = viewModel[args.id]
+        if (cat == null) {
+            binding.errorTextview.text = getString(R.string.no_cat_found)
+            binding.catPicture.isVisible = false
+            return
+        }
+
+        binding.catId.text = getString(R.string.id_with_colon, cat.id.toString())
+        binding.catName.text = getString(R.string.name_with_colon, cat.name)
+        binding.catDesc.text = getString(R.string.desc_with_colon, cat.description)
+        binding.catPlace.text = getString(R.string.place_with_colon, cat.place)
+        binding.catReward.text = getString(R.string.reward_with_colon, cat.reward.toString())
+        binding.catUserid.text = getString(R.string.userID_with_colon, cat.userId)
+        binding.catDate.text = getString(R.string.date_with_colon, viewModel.humanDate(cat.date))
 
     }
 
