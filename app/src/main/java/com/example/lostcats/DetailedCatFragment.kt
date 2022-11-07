@@ -1,25 +1,17 @@
 package com.example.lostcats
 
-import android.content.res.Configuration
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.lostcats.databinding.FragmentAddCatBinding
+import androidx.navigation.fragment.navArgs
 import com.example.lostcats.databinding.FragmentDetailedCatBinding
-import com.example.lostcats.models.Cat
-import com.example.lostcats.models.CatsAdapter
 import com.example.lostcats.models.CatsViewModel
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.example.lostcats.models.UsersViewModel
 
 class DetailedCatFragment : Fragment() {
 
@@ -31,7 +23,8 @@ class DetailedCatFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val viewModel: CatsViewModel by activityViewModels()
+    private val catsViewModel: CatsViewModel by activityViewModels()
+    private val usersViewModel: UsersViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +38,7 @@ class DetailedCatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val cat = viewModel[args.id]
+        val cat = catsViewModel[args.id]
         if (cat == null) {
             binding.errorTextview.text = getString(R.string.no_cat_found)
             binding.catPicture.isVisible = false
@@ -58,7 +51,25 @@ class DetailedCatFragment : Fragment() {
         binding.catPlace.text = getString(R.string.place_with_colon, cat.place)
         binding.catReward.text = getString(R.string.reward_with_colon, cat.reward.toString())
         binding.catUserid.text = getString(R.string.userID_with_colon, cat.userId)
-        binding.catDate.text = getString(R.string.date_with_colon, viewModel.humanDate(cat.date))
+        binding.catDate.text =
+            getString(R.string.date_with_colon, catsViewModel.humanDate(cat.date))
+
+        binding.buttonContact.setOnClickListener() {
+            val emailIntent = Intent(Intent.ACTION_SENDTO)
+            emailIntent.data = Uri.parse("mailto:")
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(cat.userId))
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, cat.name + " " + cat.id.toString())
+            // TODO: try catch error handling
+            startActivity(emailIntent)
+        }
+
+        if (cat.userId == usersViewModel.userLiveData.toString()) {
+            binding.buttonDelete.visibility = View.VISIBLE
+            binding.buttonDelete.setOnClickListener() {
+                catsViewModel.delete(cat.id)
+                findNavController().popBackStack()
+            }
+        }
 
     }
 

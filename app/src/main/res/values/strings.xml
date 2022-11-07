@@ -13,6 +13,8 @@
     <string name="sort">Sort</string>
     <string name="signout">Sign out</string>
     <string name="register">Register</string>
+    <string name="contact">Contact</string>
+    <string name="delete">Delete</string>
     <string name="hint_password">Password</string>
     <string name="hint_email_login">Email</string>
 

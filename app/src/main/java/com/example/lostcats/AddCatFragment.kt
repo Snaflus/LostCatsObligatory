@@ -26,7 +26,7 @@ class AddCatFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val viewModel: CatsViewModel by activityViewModels()
+    private val catsViewModel: CatsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

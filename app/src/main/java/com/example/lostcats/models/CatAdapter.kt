@@ -31,6 +31,7 @@ class CatsAdapter(
         viewHolder.textViewCatReward.text = items[position].reward.toString() //int
         viewHolder.textViewCatUserId.text = items[position].userId //string
         viewHolder.textViewCatDate.text = items[position].date.toString() //long
+        // TODO: use humanDate() from viewModel
 //        if (items[position].pictureUrl == "") {
 //            set to fallback image
 //        } else {

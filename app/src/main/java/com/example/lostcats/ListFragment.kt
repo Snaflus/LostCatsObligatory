@@ -4,16 +4,13 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.lostcats.databinding.FragmentListBinding
 import com.example.lostcats.models.CatsAdapter
 import com.example.lostcats.models.CatsViewModel
-import com.google.android.material.chip.Chip
 
 class ListFragment : Fragment() {
 
@@ -23,7 +20,7 @@ class ListFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val viewModel: CatsViewModel by activityViewModels()
+    private val catsViewModel: CatsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +49,7 @@ class ListFragment : Fragment() {
 //            binding.messageView.text = "You want " + chip.text
 //        }
 
-        viewModel.catsLiveData.observe(viewLifecycleOwner) { cats ->
+        catsViewModel.catsLiveData.observe(viewLifecycleOwner) { cats ->
             binding.progresscircle.visibility = View.GONE
 
             binding.recyclerView.visibility = if (cats == null) View.GONE else View.VISIBLE
@@ -75,12 +72,12 @@ class ListFragment : Fragment() {
             }
         }
 
-        viewModel.errorMessageLiveData.observe(viewLifecycleOwner) { errorMessage ->
+        catsViewModel.errorMessageLiveData.observe(viewLifecycleOwner) { errorMessage ->
             Log.d("KIWI", errorMessage)
         }
 
         binding.swiperefresh.setOnRefreshListener {
-            viewModel.reload()
+            catsViewModel.reload()
             binding.swiperefresh.isRefreshing = false
         }
 
@@ -88,7 +85,7 @@ class ListFragment : Fragment() {
             findNavController().navigate(R.id.action_ListFragment_to_AddCatFragment)
         }
 
-        viewModel.reload()
+        catsViewModel.reload()
     }
 
     override fun onDestroyView() {

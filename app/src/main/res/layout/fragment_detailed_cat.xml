@@ -78,6 +78,31 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button_contact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="@string/contact"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_margin="16dp"/>
+
+                <Button
+                    android:id="@+id/button_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="@string/delete"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:backgroundTint="@color/red"
+                    android:visibility="gone"
+                    android:layout_margin="16dp"/>
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

@@ -24,4 +24,8 @@
         <item name="hintTextColor">@color/white</item>
     </style>
 
+    <style name="DeleteButtonLayoutStyle" parent="Widget.MaterialComponents.Button">
+        <item name="colorAccent">@color/red</item>
+    </style>
+
 </resources>
