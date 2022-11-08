@@ -71,7 +71,7 @@ class LoginUserFragment : Fragment() {
                 findNavController().navigate(action)
                 Snackbar.make(
                     binding.root,
-                    getString(R.string.welcome_snackbar, usersViewModel.userLiveData.toString()),
+                    getString(R.string.welcome_snackbar, (usersViewModel.userLiveData.value?.email ?: String)),
                     Snackbar.LENGTH_LONG
                 ).show()
             }

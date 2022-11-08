@@ -78,7 +78,7 @@ class DetailedCatFragment : Fragment() {
             }
         }
 
-        if (cat.userId == usersViewModel.userLiveData.toString()) {
+        if (cat.userId == (usersViewModel.userLiveData.value?.email ?: String)) {
             binding.buttonDelete.visibility = View.VISIBLE
 
             binding.buttonDelete.setOnClickListener() {
