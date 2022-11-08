@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/action_ListFragment_to_LoginFragment"
-            app:destination="@id/LoginFragment" />
+            app:destination="@id/LoginUserFragment" />
         <action
             android:id="@+id/action_ListFragment_to_AddCatFragment"
             app:destination="@+id/AddCatFragment" />
@@ -21,13 +21,22 @@
             app:destination="@+id/DetailedCatFragment" />
     </fragment>
     <fragment
-        android:id="@+id/LoginFragment"
-        android:name="com.example.lostcats.LoginFragment"
-        android:label="@string/login_fragment_label"
-        tools:layout="@layout/fragment_login">
+        android:id="@+id/LoginUserFragment"
+        android:name="com.example.lostcats.LoginUserFragment"
+        android:label="@string/login_user_fragment_label"
+        tools:layout="@layout/fragment_login_user">
         <action
-            android:id="@+id/action_LoginFragment_to_ListFragment"
+            android:id="@+id/action_LoginUserFragment_to_ListFragment"
             app:destination="@+id/ListFragment" />
+        <action
+            android:id="@+id/action_LoginUserFragment_to_RegisterUserFragment"
+            app:destination="@+id/RegisterUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/RegisterUserFragment"
+        android:name="com.example.lostcats.RegisterUserFragment"
+        android:label="@string/register_user_fragment_label"
+        tools:layout="@layout/fragment_settings">
     </fragment>
     <fragment
         android:id="@+id/AddCatFragment"

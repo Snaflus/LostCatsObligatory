@@ -2,7 +2,7 @@ package com.example.lostcats.repositories
 
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
-import com.example.lostcats.LoginFragmentDirections
+import com.example.lostcats.LoginUserFragmentDirections
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

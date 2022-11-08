@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.action_login -> {
                 val navController = findNavController(R.id.nav_host_fragment_content_main)
-                navController.navigate(R.id.LoginFragment)
+                navController.navigate(R.id.LoginUserFragment)
                 true
             }
             R.id.action_signout -> {

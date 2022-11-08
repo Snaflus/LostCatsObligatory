@@ -101,7 +101,7 @@ class DetailedCatFragment : Fragment() {
             setMessage(getString(R.string.delete_dialog_message, cat.name, cat.id.toString()))
             setPositiveButton(
                 getString(R.string.delete)
-            ) { dialog, which ->
+            ) { _, _ ->
                 catsViewModel.delete(cat.id)
                 findNavController().popBackStack()
             }

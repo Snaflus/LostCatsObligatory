@@ -4,7 +4,8 @@
     <string name="app_name">Lost Cats</string>
     <string name="action_settings">Settings</string>
     <string name="list_fragment_label">Lost Cats List</string>
-    <string name="login_fragment_label">Login</string>
+    <string name="login_user_fragment_label">Login</string>
+    <string name="register_user_fragment_label">Register</string>
     <string name="add_cat_fragment_label">Add cat</string>
     <string name="settings_fragment_label">Settings</string>
     <string name="detailed_cat_fragment_label">Cat details</string>

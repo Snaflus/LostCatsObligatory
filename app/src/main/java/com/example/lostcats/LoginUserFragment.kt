@@ -11,15 +11,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.example.lostcats.databinding.FragmentLoginBinding
+import com.example.lostcats.databinding.FragmentLoginUserBinding
 import com.example.lostcats.models.UsersViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 import kotlin.math.log
 
-class LoginFragment : Fragment() {
+class LoginUserFragment : Fragment() {
 
-    private var _binding: FragmentLoginBinding? = null
+    private var _binding: FragmentLoginUserBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -32,7 +32,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        _binding = FragmentLoginUserBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -42,7 +42,7 @@ class LoginFragment : Fragment() {
 
         if (usersViewModel.userLiveData.value != null) {
             // current user exists: No need to login again
-            findNavController().navigate(R.id.action_LoginFragment_to_ListFragment)
+            findNavController().navigate(R.id.action_LoginUserFragment_to_ListFragment)
         }
         binding.buttonLogin.setOnClickListener {
             val email = binding.edittextEmail.text.toString().trim()
@@ -77,7 +77,7 @@ class LoginFragment : Fragment() {
 
         usersViewModel.userLiveData.observe(viewLifecycleOwner) {
             if (usersViewModel.userLiveData.value != null) {
-                val action = LoginFragmentDirections.actionLoginFragmentToListFragment()
+                val action = LoginUserFragmentDirections.actionLoginUserFragmentToListFragment()
                 findNavController().navigate(action)
             }
         }
