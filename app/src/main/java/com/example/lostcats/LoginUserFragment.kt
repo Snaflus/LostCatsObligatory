@@ -48,11 +48,11 @@ class LoginUserFragment : Fragment() {
             val email = binding.edittextEmail.text.toString().trim()
             val password = binding.edittextPassword.text.toString().trim()
             if (email.isEmpty()) {
-                binding.edittextEmail.error = "No email"
+                binding.edittextEmail.error = getString(R.string.username_error)
                 return@setOnClickListener
             }
             if (password.isEmpty()) {
-                binding.edittextPassword.error = "No password"
+                binding.edittextPassword.error = getString(R.string.password_error)
                 return@setOnClickListener
             }
             // https://firebase.google.com/docs/auth/android/password-auth
@@ -61,24 +61,19 @@ class LoginUserFragment : Fragment() {
         }
 
         binding.buttonRegister.setOnClickListener {
-            val email = binding.edittextEmail.text.toString().trim()
-            val password = binding.edittextPassword.text.toString().trim()
-            if (email.isEmpty()) {
-                binding.edittextEmail.error = "No email"
-                return@setOnClickListener
-            }
-            if (password.isEmpty()) {
-                binding.edittextPassword.error = "No password"
-                return@setOnClickListener
-            }
-            usersViewModel.createUserWithEmailAndPassword(email, password)
-            // TODO: make register its own fragment for usability
+            val action = LoginUserFragmentDirections.actionLoginUserFragmentToRegisterUserFragment()
+            findNavController().navigate(action)
         }
 
         usersViewModel.userLiveData.observe(viewLifecycleOwner) {
             if (usersViewModel.userLiveData.value != null) {
                 val action = LoginUserFragmentDirections.actionLoginUserFragmentToListFragment()
                 findNavController().navigate(action)
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.welcome_snackbar, usersViewModel.userLiveData.toString()),
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
         }
         usersViewModel.errorLiveData.observe(viewLifecycleOwner) {

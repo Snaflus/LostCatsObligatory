@@ -106,7 +106,6 @@ class DetailedCatFragment : Fragment() {
                 findNavController().popBackStack()
             }
             setNegativeButton(getString(R.string.back), null)
-            setNeutralButton("Maybe", null)
             show()
         }
     }
