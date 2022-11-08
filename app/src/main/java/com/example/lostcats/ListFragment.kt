@@ -34,6 +34,8 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // TODO: make filtering
+        // TODO: make sorting 
 
 //        binding.filterChip.setOnClickListener {
 //            binding.messageView.text = "Clicked"

@@ -3,7 +3,10 @@ package com.example.lostcats
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.*
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -12,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.lostcats.databinding.FragmentDetailedCatBinding
 import com.example.lostcats.models.CatsViewModel
 import com.example.lostcats.models.UsersViewModel
+
 
 class DetailedCatFragment : Fragment() {
 
@@ -59,13 +63,19 @@ class DetailedCatFragment : Fragment() {
             emailIntent.data = Uri.parse("mailto:")
             emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(cat.userId))
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, cat.name + " " + cat.id.toString())
-            // TODO: try catch error handling
-            startActivity(emailIntent)
+
+            //resolveActivity uses queries from manifest
+            if (emailIntent.resolveActivity(requireActivity().packageManager) != null) {
+                startActivity(emailIntent)
+            } else {
+                Log.d("KIWI", "Email intent unable to handle action")
+            }
         }
 
         if (cat.userId == usersViewModel.userLiveData.toString()) {
             binding.buttonDelete.visibility = View.VISIBLE
             binding.buttonDelete.setOnClickListener() {
+                // TODO: make confirmation dialog
                 catsViewModel.delete(cat.id)
                 findNavController().popBackStack()
             }
