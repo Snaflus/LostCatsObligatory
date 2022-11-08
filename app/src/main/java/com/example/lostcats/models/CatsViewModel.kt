@@ -67,8 +67,4 @@ class CatsViewModel : ViewModel() {
     fun delete(id: Int) {
         repository.delete(id)
     }
-
-    fun humanDate(date: Long): String {
-        return DateFormat.getDateInstance().format(date * 1000L)
-    }
 }

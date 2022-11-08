@@ -1,20 +1,26 @@
 package com.example.lostcats
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.lostcats.databinding.FragmentDetailedCatBinding
+import com.example.lostcats.models.Cat
 import com.example.lostcats.models.CatsViewModel
 import com.example.lostcats.models.UsersViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class DetailedCatFragment : Fragment() {
@@ -56,7 +62,7 @@ class DetailedCatFragment : Fragment() {
         binding.catReward.text = getString(R.string.reward_with_colon, cat.reward.toString())
         binding.catUserid.text = getString(R.string.userID_with_colon, cat.userId)
         binding.catDate.text =
-            getString(R.string.date_with_colon, catsViewModel.humanDate(cat.date))
+            getString(R.string.date_with_colon, cat.humanDate())
 
         binding.buttonContact.setOnClickListener() {
             val emailIntent = Intent(Intent.ACTION_SENDTO)
@@ -74,10 +80,9 @@ class DetailedCatFragment : Fragment() {
 
         if (cat.userId == usersViewModel.userLiveData.toString()) {
             binding.buttonDelete.visibility = View.VISIBLE
+
             binding.buttonDelete.setOnClickListener() {
-                // TODO: make confirmation dialog
-                catsViewModel.delete(cat.id)
-                findNavController().popBackStack()
+                deleteAlert(cat)
             }
         }
 
@@ -86,5 +91,23 @@ class DetailedCatFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun deleteAlert(cat: Cat) {
+        val builder = AlertDialog.Builder(requireActivity())
+        with(builder)
+        {
+            setTitle(getString(R.string.delete_dialog_title))
+            setMessage(getString(R.string.delete_dialog_message, cat.name, cat.id.toString()))
+            setPositiveButton(
+                getString(R.string.delete)
+            ) { dialog, which ->
+                catsViewModel.delete(cat.id)
+                findNavController().popBackStack()
+            }
+            setNegativeButton(getString(R.string.back), null)
+            setNeutralButton("Maybe", null)
+            show()
+        }
     }
 }

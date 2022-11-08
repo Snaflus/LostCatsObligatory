@@ -1,5 +1,7 @@
 package com.example.lostcats.models
 
+import java.text.DateFormat
+
 data class Cat (
     val id: Int,
     val name: String,
@@ -14,5 +16,9 @@ data class Cat (
 
     override fun toString(): String{
         return "$id $name $description $place $reward $userId $date $pictureUrl"
+    }
+
+    fun humanDate(): String {
+        return DateFormat.getDateInstance().format(date * 1000L)
     }
 }
