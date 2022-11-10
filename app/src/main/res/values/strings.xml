@@ -20,6 +20,7 @@
     <string name="hint_password">Password</string>
     <string name="hint_password_confirm">Confirm password</string>
     <string name="hint_email_login">Email</string>
+    <string name="add_your_cat">Add cat</string>
     <string name="delete_dialog_title">Delete your cat</string>
     <string name="delete_dialog_message">Confirm deletion of cat "%1$s" with ID "%2$s"</string>
     <string name="welcome_snackbar">Welcome %1$s</string>
@@ -27,7 +28,17 @@
     <string name="no_cat_found">No cat found</string>
     <string name="password_error">No password</string>
     <string name="username_error">No username</string>
+    <string name="not_logged_in_error">Not logged in</string>
     <string name="password_match_error">Passwords don\'t match</string>
+    <string name="field_empty">Field empty</string>
+
+    <string name="id">ID</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="place">Place</string>
+    <string name="reward">Reward</string>
+    <string name="userID">User</string>
+    <string name="date">Date</string>
 
     <string name="id_with_colon">ID: %1$s</string>
     <string name="name_with_colon">Name: %1$s</string>

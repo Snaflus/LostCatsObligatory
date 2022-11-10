@@ -19,7 +19,7 @@
 
 
 
-    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="MaterialTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/state_list_box_color</item>
         <item name="hintTextColor">@color/white</item>
     </style>

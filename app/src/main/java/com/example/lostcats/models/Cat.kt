@@ -11,6 +11,7 @@ data class Cat (
     val userId: String,
     val date: Long,
     val pictureUrl: String) {
+
     constructor(name: String, description: String, place: String, reward: Int, userId: String, pictureUrl: String):
             this(-1,name,description,place,reward,userId,System.currentTimeMillis()/1000,pictureUrl)
 

@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.lostcats.databinding.FragmentListBinding
 import com.example.lostcats.models.CatsAdapter
 import com.example.lostcats.models.CatsViewModel
+import com.example.lostcats.models.UsersViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class ListFragment : Fragment() {
 
@@ -21,6 +23,7 @@ class ListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val catsViewModel: CatsViewModel by activityViewModels()
+    private val usersViewModel: UsersViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -84,7 +87,15 @@ class ListFragment : Fragment() {
         }
 
         binding.floatingPlusButton.setOnClickListener {
-            findNavController().navigate(R.id.action_ListFragment_to_AddCatFragment)
+            if (usersViewModel.userLiveData.value != null) {
+                findNavController().navigate(R.id.action_ListFragment_to_AddCatFragment)
+            } else {
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.not_logged_in_error),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
         }
 
         catsViewModel.reload()

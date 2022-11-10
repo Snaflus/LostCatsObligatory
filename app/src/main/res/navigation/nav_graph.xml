@@ -36,7 +36,7 @@
         android:id="@+id/RegisterUserFragment"
         android:name="com.example.lostcats.RegisterUserFragment"
         android:label="@string/register_user_fragment_label"
-        tools:layout="@layout/fragment_settings">
+        tools:layout="@layout/fragment_register_user">
         <action
             android:id="@+id/action_RegisterUserFragment_to_ListFragment"
             app:destination="@+id/ListFragment" />
