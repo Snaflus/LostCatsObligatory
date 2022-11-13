@@ -1,16 +1,13 @@
 package com.example.lostcats
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -20,7 +17,6 @@ import com.example.lostcats.databinding.FragmentDetailedCatBinding
 import com.example.lostcats.models.Cat
 import com.example.lostcats.models.CatsViewModel
 import com.example.lostcats.models.UsersViewModel
-import com.google.android.material.snackbar.Snackbar
 
 
 class DetailedCatFragment : Fragment() {
@@ -39,7 +35,7 @@ class DetailedCatFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentDetailedCatBinding.inflate(inflater, container, false)
         return binding.root
@@ -64,7 +60,7 @@ class DetailedCatFragment : Fragment() {
         binding.catDate.text =
             getString(R.string.date_with_colon, cat.humanDate())
 
-        binding.buttonContact.setOnClickListener() {
+        binding.buttonContact.setOnClickListener {
             val emailIntent = Intent(Intent.ACTION_SENDTO)
             emailIntent.data = Uri.parse("mailto:")
             emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(cat.userId))
@@ -81,7 +77,7 @@ class DetailedCatFragment : Fragment() {
         if (cat.userId == (usersViewModel.userLiveData.value?.email ?: String)) {
             binding.buttonDelete.visibility = View.VISIBLE
 
-            binding.buttonDelete.setOnClickListener() {
+            binding.buttonDelete.setOnClickListener {
                 deleteAlert(cat)
             }
         }
@@ -93,7 +89,7 @@ class DetailedCatFragment : Fragment() {
         _binding = null
     }
 
-    fun deleteAlert(cat: Cat) {
+    private fun deleteAlert(cat: Cat) {
         val builder = AlertDialog.Builder(requireActivity())
         with(builder)
         {

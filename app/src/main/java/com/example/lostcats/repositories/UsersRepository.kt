@@ -1,13 +1,11 @@
 package com.example.lostcats.repositories
 
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavController
-import com.example.lostcats.LoginUserFragmentDirections
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-open class UsersRepository() {
+open class UsersRepository {
     private val auth = Firebase.auth
     val userLiveData: MutableLiveData<FirebaseUser?> = MutableLiveData<FirebaseUser?>()
     val errorLiveData: MutableLiveData<String?> = MutableLiveData<String?>()

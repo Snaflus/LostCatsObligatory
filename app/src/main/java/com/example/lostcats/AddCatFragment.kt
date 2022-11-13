@@ -1,23 +1,16 @@
 package com.example.lostcats
 
-import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lostcats.databinding.FragmentAddCatBinding
 import com.example.lostcats.models.Cat
-import com.example.lostcats.models.CatsAdapter
 import com.example.lostcats.models.CatsViewModel
 import com.example.lostcats.models.UsersViewModel
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class AddCatFragment : Fragment() {
 
@@ -33,7 +26,7 @@ class AddCatFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentAddCatBinding.inflate(inflater, container, false)
         return binding.root

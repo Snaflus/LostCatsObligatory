@@ -1,13 +1,9 @@
 package com.example.lostcats.models
 
 import android.util.Log
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.lostcats.repositories.LostCatsRepository
-import java.text.DateFormat
-import java.util.*
 
 class CatsViewModel : ViewModel() {
     private val repository = LostCatsRepository()
