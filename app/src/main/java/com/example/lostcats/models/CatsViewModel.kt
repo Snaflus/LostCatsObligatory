@@ -7,12 +7,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.lostcats.repositories.LostCatsRepository
 import java.text.DateFormat
+import java.util.*
 
 class CatsViewModel : ViewModel() {
     private val repository = LostCatsRepository()
     val catsLiveData: LiveData<List<Cat>> = repository.catsLiveData
     val errorMessageLiveData: LiveData<String> = repository.errorMessageLiveData
-    val updateMessageLiveData: LiveData<String> = repository.errorMessageLiveData
 
     init {
         reload()
@@ -22,16 +22,8 @@ class CatsViewModel : ViewModel() {
         repository.getPosts()
     }
 
-    operator fun get(userId: String, place: String, sort_by: String){
+    fun getSort(sort_by: String) {
         var data: List<Cat> = catsLiveData.value!!
-
-//        if (userId.isNotBlank()) {
-//            data = data.filter { it.first().userId == userId } as MutableList<List<Cat>>
-//        }
-//
-//        if (place.isNotBlank()) {
-//            data = data.filter { it.first().place == place } as MutableList<List<Cat>>
-//        }
 
         if (sort_by.isNotBlank()) {
             when (sort_by) {
@@ -40,14 +32,34 @@ class CatsViewModel : ViewModel() {
                 "reward" -> data = catsLiveData.value!!.sortedByDescending { it.reward }
                 "date" -> data = catsLiveData.value!!.sortedByDescending { it.date }
                 else -> {
-                    Log.d("KIWI","incorrect sorting parameter")
+                    Log.d("KIWI", "incorrect sorting parameter")
                 }
             }
-        } else {
+        }
+
+        if (sort_by.isBlank()) {
             reload()
-            data = catsLiveData.value!!
+            return
         }
         repository.getSort(data)
+    }
+
+    fun getFilter(filter: String) {
+        var data: List<Cat> = catsLiveData.value!!
+
+        if (filter.isNotBlank()) {
+            data = data.filter {
+                it.name.lowercase().contains(filter.lowercase()) ||
+                        it.place.lowercase().contains(filter.lowercase()) ||
+                        it.reward >= (filter.toIntOrNull() ?: 0)
+            }
+        }
+
+        if (filter.isBlank()) {
+            reload()
+            return
+        }
+        repository.getFilter(data)
     }
 
     operator fun get(id: Int): Cat? {

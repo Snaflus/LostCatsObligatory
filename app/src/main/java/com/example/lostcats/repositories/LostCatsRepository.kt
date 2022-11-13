@@ -51,9 +51,17 @@ class LostCatsRepository {
         if (list.isNotEmpty()) {
             catsLiveData.postValue(list)
         } else {
-            val message = "Repository error in getSort"
+            val message = "Error in getSort"
             errorMessageLiveData.postValue(message)
             Log.d("KIWI", message)
+        }
+    }
+
+    fun getFilter(list: List<Cat>) {
+        catsLiveData.postValue(list)
+        if (list.isEmpty()) {
+            val message = "No search results found"
+            errorMessageLiveData.postValue(message)
         }
     }
 

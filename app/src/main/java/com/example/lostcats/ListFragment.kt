@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -14,7 +15,6 @@ import com.example.lostcats.models.CatsViewModel
 import com.example.lostcats.models.UsersViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
-import kotlin.math.log
 
 class ListFragment : Fragment() {
 
@@ -39,14 +39,24 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // TODO: make filtering
 
+        binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(query: String?): Boolean {
+                catsViewModel.getFilter("$query")
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                catsViewModel.getFilter("$query")
+                return false
+            }
+        })
 
         binding.chipGroupFilter.setOnCheckedStateChangeListener { group, checkedIds ->
             // https://howtodoandroid.com/android-chips-material-component/
             val chip: Chip? = group.findViewById(group.checkedChipId)
 
-            val sorting = with(chip.toString()){
+            val sorting = with(chip.toString()) {
                 when {
                     contains("date") -> "date"
                     contains("name") -> "name"
@@ -55,7 +65,7 @@ class ListFragment : Fragment() {
                     else -> ""
                 }
             }
-            catsViewModel["", "", sorting]
+            catsViewModel.getSort(sorting)
         }
 
         catsViewModel.catsLiveData.observe(viewLifecycleOwner) { cats ->
@@ -82,7 +92,14 @@ class ListFragment : Fragment() {
         }
 
         catsViewModel.errorMessageLiveData.observe(viewLifecycleOwner) { errorMessage ->
-            Log.d("KIWI", errorMessage)
+            if (errorMessage.isNotBlank()) {
+                Snackbar.make(
+                    binding.root,
+                    errorMessage,
+                    Snackbar.LENGTH_LONG
+                ).show()
+                Log.d("KIWI", errorMessage)
+            }
         }
 
         binding.swiperefresh.setOnRefreshListener {
