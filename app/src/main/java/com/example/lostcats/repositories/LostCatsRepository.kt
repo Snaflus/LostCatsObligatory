@@ -47,6 +47,16 @@ class LostCatsRepository {
         })
     }
 
+    fun getSort(list: List<Cat>) {
+        if (list.isNotEmpty()) {
+            catsLiveData.postValue(list)
+        } else {
+            val message = "Repository error in getSort"
+            errorMessageLiveData.postValue(message)
+            Log.d("KIWI", message)
+        }
+    }
+
     fun add(cat: Cat) {
         lostCatsService.saveCat(cat).enqueue(object : Callback<Cat> {
             override fun onResponse(call: Call<Cat>, response: Response<Cat>) {

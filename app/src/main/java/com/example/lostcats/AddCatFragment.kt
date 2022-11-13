@@ -74,6 +74,7 @@ class AddCatFragment : Fragment() {
             }
             val newCat = Cat(name, description, place, reward.toString().toInt(), userId, "")
             catsViewModel.add(newCat)
+            catsViewModel.reload()
             findNavController().popBackStack()
         }
     }

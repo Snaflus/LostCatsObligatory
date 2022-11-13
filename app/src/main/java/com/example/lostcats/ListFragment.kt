@@ -12,7 +12,9 @@ import com.example.lostcats.databinding.FragmentListBinding
 import com.example.lostcats.models.CatsAdapter
 import com.example.lostcats.models.CatsViewModel
 import com.example.lostcats.models.UsersViewModel
+import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
+import kotlin.math.log
 
 class ListFragment : Fragment() {
 
@@ -38,21 +40,23 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // TODO: make filtering
-        // TODO: make sorting 
 
-//        binding.filterChip.setOnClickListener {
-//            binding.messageView.text = "Clicked"
-//        }
-//
-//        binding.filterChip.setOnCheckedChangeListener { compoundButton, checked ->
-//            binding.messageView.text = checked.toString()
-//        }
-//
-//        binding.chipGroupFilter.setOnCheckedStateChangeListener { group, checkedIds ->
-//            // https://howtodoandroid.com/android-chips-material-component/
-//            val chip: Chip = group.findViewById(checkedIds[0])
-//            binding.messageView.text = "You want " + chip.text
-//        }
+
+        binding.chipGroupFilter.setOnCheckedStateChangeListener { group, checkedIds ->
+            // https://howtodoandroid.com/android-chips-material-component/
+            val chip: Chip? = group.findViewById(group.checkedChipId)
+
+            val sorting = with(chip.toString()){
+                when {
+                    contains("date") -> "date"
+                    contains("name") -> "name"
+                    contains("place") -> "place"
+                    contains("reward") -> "reward"
+                    else -> ""
+                }
+            }
+            catsViewModel["", "", sorting]
+        }
 
         catsViewModel.catsLiveData.observe(viewLifecycleOwner) { cats ->
             binding.progresscircle.visibility = View.GONE
