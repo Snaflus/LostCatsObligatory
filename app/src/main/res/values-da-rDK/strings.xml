@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lost Cats</string>
+    <string name="action_settings">Indstillinger</string>
+    <string name="list_fragment_label">Lost Cats liste</string>
+    <string name="login_user_fragment_label">Login</string>
+    <string name="register_user_fragment_label">Registrer</string>
+    <string name="add_cat_fragment_label">Tilføj kat</string>
+    <string name="settings_fragment_label">Indstillinger</string>
+    <string name="detailed_cat_fragment_label">Kat detaljer</string>
+    <string name="continue_no_login">Fortsæt uden login</string>
+    <string name="login">Login</string>
+    <string name="sort">Sorter</string>
+    <string name="signout">Logud</string>
+    <string name="register">Registrer</string>
+    <string name="contact">Kontakt</string>
+    <string name="delete">Slet</string>
+    <string name="back">Tilbage</string>
+    <string name="hint_password">Kodeord</string>
+    <string name="hint_password_confirm">Bekræft kodeord</string>
+    <string name="hint_email_login">Email</string>
+    <string name="add_your_cat">Tilføj kat</string>
+    <string name="delete_dialog_title">Slet kat</string>
+    <string name="delete_dialog_message">Bekræft slettelse af kat %1$s med ID %2$s</string>
+    <string name="welcome_snackbar">Velkommen %1$s</string>
+    <string name="no_cat_found">Ingen kat fundet</string>
+    <string name="password_error">Manglende kodeord</string>
+    <string name="username_error">Manglende brugernavn</string>
+    <string name="not_logged_in_error">Ikke logget ind</string>
+    <string name="password_match_error">Kodeord er ikke ens</string>
+    <string name="field_empty">Tomt felt</string>
+    <string name="id">ID</string>
+    <string name="name">Navn</string>
+    <string name="description">Beskrivelse</string>
+    <string name="place">Sted</string>
+    <string name="reward">Belønning</string>
+    <string name="userID">Bruger</string>
+    <string name="date">Dato</string>
+    <string name="id_with_colon">ID: %1$s</string>
+    <string name="name_with_colon">Navn: %1$s</string>
+    <string name="desc_with_colon">Beskrivelse: %1$s</string>
+    <string name="place_with_colon">Sted: %1$s</string>
+    <string name="reward_with_colon">Belønning: %1$s</string>
+    <string name="userID_with_colon">Bruger: %1$s</string>
+    <string name="date_with_colon">Dato: %1$s</string>
+</resources>
