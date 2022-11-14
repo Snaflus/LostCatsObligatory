@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_settings -> {
                 val navController = findNavController(R.id.nav_host_fragment_content_main)
-                navController.navigate(R.id.SettingsFragment)
+                navController.navigate(R.id.PreferenceFragment)
                 true
             }
             R.id.action_login -> {

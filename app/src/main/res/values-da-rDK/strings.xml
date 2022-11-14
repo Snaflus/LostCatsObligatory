@@ -43,4 +43,8 @@
     <string name="reward_with_colon">Belønning: %1$s</string>
     <string name="userID_with_colon">Bruger: %1$s</string>
     <string name="date_with_colon">Dato: %1$s</string>
+    <string name="appearence_header">Udseende</string>
+    <string name="language_header">Sprog</string>
+    <string name="nightmode_title">Nattetilstand</string>
+    <string name="language_title_set">Anvendt sprog</string>
 </resources>

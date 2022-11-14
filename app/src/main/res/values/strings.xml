@@ -47,4 +47,10 @@
     <string name="reward_with_colon">Reward: %1$s</string>
     <string name="userID_with_colon">User: %1$s</string>
     <string name="date_with_colon">Date: %1$s</string>
+
+    <!-- Preference -->
+    <string name="appearence_header">Appearance</string>
+    <string name="language_header">Language</string>
+    <string name="nightmode_title">Dark mode</string>
+    <string name="language_title_set">Display language</string>
 </resources>

@@ -1,0 +1,23 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/appearence_header">
+
+        <SwitchPreferenceCompat
+            app:key="nightmode"
+            app:title="@string/nightmode_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/language_header">
+
+        <ListPreference
+            app:key="language"
+            app:title="@string/language_title_set"
+            app:useSimpleSummaryProvider="true"
+            app:entries="@array/languages"
+            app:entryValues="@array/languages"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
