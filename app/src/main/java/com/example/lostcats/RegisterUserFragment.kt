@@ -60,7 +60,7 @@ class RegisterUserFragment : Fragment() {
                 findNavController().navigate(action)
                 Snackbar.make(
                     binding.root,
-                    getString(R.string.welcome_snackbar, (usersViewModel.userLiveData.value?.email ?: String)),
+                    getString(R.string.welcome_snackbar, usersViewModel.userLiveData.value?.email),
                     Snackbar.LENGTH_LONG
                 ).show()
             }
