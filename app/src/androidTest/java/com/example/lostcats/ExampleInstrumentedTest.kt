@@ -2,6 +2,7 @@ package com.example.lostcats
 
 import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -36,6 +37,16 @@ class ExampleInstrumentedTest {
         Thread.sleep(300)
 
         Thread.sleep(300)
-        onView(withId(R.id.search_bar)).perform(typeText("Musti"))
+        onView(withId(R.id.floatingPlusButton)).perform(click())
+        Thread.sleep(300)
+        onView(withId(R.id.edittext_name)).perform(typeText("Casper's kat"), closeSoftKeyboard())
+        onView(withId(R.id.edittext_description)).perform(typeText("Zebra striber"), closeSoftKeyboard())
+        onView(withId(R.id.edittext_place)).perform(typeText("Aalborg"), closeSoftKeyboard())
+        onView(withId(R.id.edittext_reward)).perform(typeText("9000"), closeSoftKeyboard())
+        onView(withId(R.id.button_add_cat)).perform(click())
+        Thread.sleep(1000)
+
+
+        //onView(withId(R.id.search_bar)).perform(typeText("Musti"))
     }
 }
